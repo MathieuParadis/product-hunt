@@ -22,13 +22,17 @@
 }
 
 .footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
+  color: #0070f3;
+  text-decoration: none;
 }
 
-.title a {
+.footer a:hover,
+.footer a:focus,
+.footer a:active {
+  text-decoration: underline;
+}
+
+.footer a {
   color: #0070f3;
   text-decoration: none;
 }

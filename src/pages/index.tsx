@@ -1,6 +1,8 @@
+// NEXT IMPORTS
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
+
+// STYLES IMPORTS
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
@@ -57,16 +59,14 @@ const Home: NextPage = () => {
       </main>
 
       <footer className={styles.footer}>
+        Coded with &#x1F9E1; by&nbsp;
         <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          href="https://github.com/MathieuParadis"
           target="_blank"
           rel="noopener noreferrer"
+          className="h1"
         >
-          Powered by
-          {' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
+          Mathieu
         </a>
       </footer>
     </div>
