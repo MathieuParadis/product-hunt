@@ -1,5 +1,6 @@
 // NEXT IMPORTS
 import Head from 'next/head';
+import Image from 'next/image'
 
 // APOLLO IMPORTS
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
@@ -27,33 +28,18 @@ function Home({ posts }: any) {
         </p>
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+        {posts.map(post => {
+          return (
+            <Image
+              src={post.node.thumbnail.url}
+              width={300} height={300}
+              className={styles.card}
+              alt="character"
+            />
+          );
+        })}
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
 
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
         </div>
       </main>
 
@@ -86,7 +72,19 @@ export async function getServerSideProps() {
   const { data } = await client.query({
     query: gql`
       query GetPosts {
-        posts(first: 50) { edges { node { id, name } } }
+        posts(topic: "") {
+          edges { 
+            node {
+              id,
+              name,
+              tagline,
+              slug,
+              thumbnail {
+                url
+              }
+            } 
+          } 
+        }
       }
     `
   });
@@ -95,7 +93,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      posts: data.posts.edges,
+      posts: data?.posts.edges,
     }
   }
 }
