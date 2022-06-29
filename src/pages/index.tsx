@@ -28,7 +28,7 @@ function Home({ posts }: any) {
         </p>
 
         <div className={styles.grid}>
-        {posts.map(post => {
+        {posts.map((post:any) => {
           return (
             <Image
               src={post.node.thumbnail.url}
