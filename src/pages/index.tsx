@@ -74,7 +74,7 @@ function Home({ posts }: any) {
 
 export default Home;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const client = new ApolloClient({
     uri: "https://api.producthunt.com/v2/api/graphql",
     cache: new InMemoryCache(), 
