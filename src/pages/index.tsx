@@ -7,7 +7,7 @@ import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 // STYLES IMPORTS
 import styles from '../styles/Home.module.css';
 
-function Home({ posts }) {
+function Home({ posts }: any) {
   console.log('posts', posts)
   return (
     <div className={styles.container}>
