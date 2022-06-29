@@ -28,16 +28,15 @@ function Home({ posts }: any) {
         </p>
 
         <div className={styles.grid}>
-        {posts.map((post:any) => {
-          return (
-            <Image
-              src={post.node.thumbnail.url}
+        {
+          posts.map((post:any) => 
+            <Image src={post.node.thumbnail.url} 
               width={300} height={300}
               className={styles.card}
               alt="character"
             />
-          );
-        })}
+          )
+        }
 
 
         </div>
