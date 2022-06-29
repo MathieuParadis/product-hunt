@@ -1,10 +1,14 @@
 // NEXT IMPORTS
 import Head from 'next/head';
 
+// APOLLO IMPORTS
+import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+
 // STYLES IMPORTS
 import styles from '../styles/Home.module.css';
 
-function Home() {
+function Home({ posts }) {
+  console.log('posts', posts)
   return (
     <div className={styles.container}>
       <Head>
@@ -15,15 +19,11 @@ function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to
-          {' '}
-          <a href="https://nextjs.org">Next.js!</a>
+          Welcome to Neo Hunt
         </h1>
 
         <p className={styles.description}>
-          Get started by editing
-          {' '}
-          <code className={styles.code}>pages/index.tsx</code>
+          Posts from Product Hunt
         </p>
 
         <div className={styles.grid}>
@@ -73,3 +73,29 @@ function Home() {
 };
 
 export default Home;
+
+export async function getStaticProps() {
+  const client = new ApolloClient({
+    uri: "https://api.producthunt.com/v2/api/graphql",
+    cache: new InMemoryCache(), 
+    headers: {
+      authorization: `Bearer ${process.env.API_KEY}`
+    }
+  })
+
+  const { data } = await client.query({
+    query: gql`
+      query GetPosts {
+        posts(first: 50) { edges { node { id, name } } }
+      }
+    `
+  });
+
+  console.log('data', data);
+
+  return {
+    props: {
+      posts: data.posts.edges,
+    }
+  }
+}
