@@ -6,6 +6,12 @@
     // allow jsx syntax in js files (for next.js project)
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     // suppress errors for spreading props
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    // allow href attribute in link component
+    "jsx-a11y/anchor-is-valid": ["error", { 
+      "components": ["Link"],
+      "specialLink": ["hrefLeft", "hrefRight"], 
+      "aspects": ["invalidHref", "preferButton"]   
+    }]
   }
 }
