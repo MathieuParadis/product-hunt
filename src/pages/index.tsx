@@ -24,7 +24,7 @@ function Home({ posts }: any) {
           Welcome to Neo Hunt
         </h1>
 
-        <p className="text-3xl font-bold">
+        <p className="text-3xl font-bold my-4">
           Posts from Product Hunt
         </p>
 
@@ -45,16 +45,28 @@ function Home({ posts }: any) {
         </div>
       </main>
 
-      <footer className={styles.footer}>
-        Coded with &#x1F9E1; by&nbsp;
-        <a
-          href="https://github.com/MathieuParadis"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="h1"
-        >
-          Mathieu
-        </a>
+      <footer className="footer">
+        <div>
+          Coded with &#x1F9E1; by&nbsp;
+          <a 
+            href="https://github.com/MathieuParadis"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Mathieu
+          </a>
+        </div>
+        &nbsp;&nbsp; &#8212; &nbsp;&nbsp;
+        <div>
+          Credits&nbsp;
+          <a 
+            href="https://www.producthunt.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Product Hunt
+          </a>
+        </div>
       </footer>
     </div>
   )

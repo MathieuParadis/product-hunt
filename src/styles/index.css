@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .footer {
+    @apply flex flex-col flex-1 py-8 border-t border-solid border-zinc-300 justify-center items-center;
+  }
+  
+  .footer a {
+    @apply text-blue-600;
+  }
+
+  .footer a:hover,
+  .footer a:focus,
+  .footer a:active {
+    @apply underline decoration-1;
+  }
+
+  @screen md {
+    .footer {
+      @apply flex flex-row;
+    }
+  }
+}
