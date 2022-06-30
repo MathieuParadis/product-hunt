@@ -1,0 +1,78 @@
+/* MAIN */
+.main {
+  @apply min-h-screen py-4 flex flex-col grow justify-center items-center;
+}
+
+/* CONTAINER */
+.container {
+  @apply p-4;
+}
+
+/* TITLE */
+.title {
+  @apply mb-8 text-7xl text-center;
+}
+
+
+/* FOOTER */
+.footer {
+  @apply flex flex-col flex-1 py-8 border-t border-solid border-zinc-500 justify-center items-center;
+}
+
+@screen md {
+  .footer {
+    @apply flex flex-row;
+  }
+}
+
+.footer a {
+  @apply text-blue-600;
+}
+
+.footer a:hover,
+.footer a:focus,
+.footer a:active {
+  @apply underline decoration-1;
+}
+
+/* CARD */
+.card {
+  @apply relative m-2 p-6 border-2 border-orange-500 rounded-lg cursor-pointer overflow-hidden;
+}
+
+.card:hover,
+.card:focus,
+.card:active {
+  @apply border-orange-800
+}
+
+.card:hover .overlay,
+.card:focus .overlay,
+.card:active .overlay,
+.card:hover .post-details,
+.card:focus .post-details,
+.card:active .post-details {
+  @apply -translate-y-full
+}
+
+.posts {
+  @apply flex flex-wrap justify-center items-center gap-4;
+}
+
+@screen md {
+  .posts {
+    @apply flex flex-wrap justify-center items-center gap-12;
+  }
+}
+
+.overlay {
+  @apply absolute w-full h-full top-full left-0 bg-black opacity-[.90] transition duration-700;
+}
+
+.post-details {
+  @apply absolute w-full h-full top-full left-0 p-3 flex flex-col justify-center items-center transition duration-700;
+}
+
+.button {
+  @apply p-3 border border-blue-600 hover:border-blue-800 w-2/4 bg-blue-600 hover:bg-blue-800 rounded-lg text-white text-center;
+}

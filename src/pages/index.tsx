@@ -6,26 +6,26 @@ import Link from 'next/link';
 // APOLLO IMPORTS
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
-// STYLES IMPORTS
-import styles from '../styles/Home.module.css';
-
 function Home({ posts }: any) {
   console.log('posts', posts)
   return (
-    <div className={styles.container}>
+    <div className="container">
       <Head>
         <title>Neo Hunt</title>
         <meta name="description" content="Product Hunt Neo" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to Neo Hunt
+      <main className="main">
+        <h1 className="title">
+          Welcome to&nbsp;
+          <span className="text-orange-500">
+          Neo Hunt
+          </span>
         </h1>
 
-        <p className="text-3xl font-bold my-4">
-          Posts from Product Hunt
+        <p className="text-3xl text-center font-bold mt-4 mb-8">
+          Popular posts from Product Hunt
         </p>
 
         <div className="posts">
