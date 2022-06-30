@@ -24,7 +24,7 @@ function Home({ posts }: any) {
           Welcome to Neo Hunt
         </h1>
 
-        <p className={styles.description}>
+        <p className="text-3xl font-bold">
           Posts from Product Hunt
         </p>
 
