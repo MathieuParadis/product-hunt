@@ -45,8 +45,8 @@ function Home({ posts }: any) {
                   {post.node.tagline}
                 </p>
                 <Link href={`/posts/${post.node.slug}`} key={post.node.id}>
-                  <a className="p-3 border border-blue-600 hover:border-blue-900">
-                    link
+                  <a className="button">
+                    Learn more
                   </a>
                 </Link>
               </div>
