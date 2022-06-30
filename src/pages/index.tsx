@@ -28,18 +28,29 @@ function Home({ posts }: any) {
           Posts from Product Hunt
         </p>
 
-        <div className={styles.grid}>
+        <div className="posts">
         {
           posts.map((post:any) => 
-            <Link href={`/posts/${post.node.slug}`} key={post.node.id}>
-              <a>
-                <Image src={post.node.thumbnail.url} 
-                  width={300} height={300}
-                  className={styles.card}
-                  alt="character"
-                />
-              </a>
-            </Link>
+            <div className="card">
+              <Image src={post.node.thumbnail.url} 
+                width={200} height={200}
+                alt="character"
+              />
+              <div className="overlay" />
+              <div className="post-details">
+                <h2 className="text-white text-center text-3xl pb-6">
+                  {post.node.name}
+                </h2>
+                <p className="text-white text-center pb-4">
+                  {post.node.tagline}
+                </p>
+                <Link href={`/posts/${post.node.slug}`} key={post.node.id}>
+                  <a className="p-3 border border-blue-600 hover:border-blue-900">
+                    link
+                  </a>
+                </Link>
+              </div>
+            </div>
           )
         }
         </div>
@@ -58,7 +69,7 @@ function Home({ posts }: any) {
         </div>
         &nbsp;&nbsp; &#8212; &nbsp;&nbsp;
         <div>
-          Credits&nbsp;
+          Credits:&nbsp;
           <a 
             href="https://www.producthunt.com/"
             target="_blank"
