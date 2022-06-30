@@ -1,6 +1,7 @@
 // NEXT IMPORTS
 import Head from 'next/head';
 import Image from 'next/image'
+import Link from 'next/link';
 
 // APOLLO IMPORTS
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
@@ -30,15 +31,17 @@ function Home({ posts }: any) {
         <div className={styles.grid}>
         {
           posts.map((post:any) => 
-            <Image src={post.node.thumbnail.url} 
-              width={300} height={300}
-              className={styles.card}
-              alt="character"
-            />
+            <Link href={`/posts/${post.node.slug}`} key={post.node.id}>
+              <a>
+                <Image src={post.node.thumbnail.url} 
+                  width={300} height={300}
+                  className={styles.card}
+                  alt="character"
+                />
+              </a>
+            </Link>
           )
         }
-
-
         </div>
       </main>
 
