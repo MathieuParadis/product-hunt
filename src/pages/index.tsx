@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
 // COMPONENTS IMPORTS
-import PostCard from '../components/PostCard.tsx';
+import PostCard from '../components/PostCard';
 
 function Home({ posts, startCursor, endCursor }: any) {
   console.log('posts', posts, startCursor, endCursor);
