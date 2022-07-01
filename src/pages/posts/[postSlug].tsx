@@ -1,10 +1,27 @@
+// NEXT IMPORTS
+import Image from 'next/image'
+
 // APOLLO IMPORTS
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
 function Post({ post }: any) {
   return (
-    <div>
-      <h1>{post.name}</h1>
+    <div className="container border w-screen px40">
+      <div className="flex">
+        <Image src={post.thumbnail.url} 
+                  width={150} height={150}
+                  alt="character"
+        />
+        <div>
+          <h1 className="title">
+            {post.name}
+          </h1>
+          <p className="">
+            {post.tagline}
+          </p>
+        </div>
+      </div>
+
     </div>
   )
 }

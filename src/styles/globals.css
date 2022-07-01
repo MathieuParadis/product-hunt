@@ -13,3 +13,18 @@ a {
 * {
   box-sizing: border-box;
 }
+
+/* MAIN */
+.main {
+  @apply py-4 flex flex-col grow justify-center items-center;
+}
+
+/* CONTAINER */
+.container {
+  @apply min-h-screen p-4;
+}
+
+/* TITLE */
+.title {
+  @apply mb-8 text-7xl text-center;
+}

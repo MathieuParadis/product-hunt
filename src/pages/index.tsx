@@ -1,13 +1,14 @@
 // NEXT IMPORTS
 import Head from 'next/head';
-import Image from 'next/image'
-import Link from 'next/link';
 
 // APOLLO IMPORTS
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
-function Home({ posts }: any) {
-  console.log('posts', posts)
+// COMPONENTS IMPORTS
+import PostCard from '../components/PostCard.tsx';
+
+function Home({ posts, startCursor, endCursor }: any) {
+  console.log('posts', posts, startCursor, endCursor);
   return (
     <div className="container">
       <Head>
@@ -31,26 +32,7 @@ function Home({ posts }: any) {
         <div className="posts">
         {
           posts.map((post:any) => 
-            <div className="card">
-              <Image src={post.node.thumbnail.url} 
-                width={200} height={200}
-                alt="character"
-              />
-              <div className="overlay" />
-              <div className="post-details">
-                <h2 className="text-white text-center text-3xl pb-6">
-                  {post.node.name}
-                </h2>
-                <p className="text-white text-center pb-4">
-                  {post.node.tagline}
-                </p>
-                <Link href={`/posts/${post.node.slug}`} key={post.node.id}>
-                  <a className="button">
-                    Learn more
-                  </a>
-                </Link>
-              </div>
-            </div>
+            <PostCard post={post} key={post.node.id} />
           )
         }
         </div>
@@ -97,7 +79,11 @@ export async function getServerSideProps() {
   const { data } = await client.query({
     query: gql`
       query GetPosts {
-        posts(topic: "") {
+        posts(topic: "", after: "") {
+          pageInfo {
+            endCursor,
+            startCursor
+          },
           edges { 
             node {
               id,
@@ -114,11 +100,11 @@ export async function getServerSideProps() {
     `
   });
 
-  console.log('data', data);
-
   return {
     props: {
       posts: data?.posts.edges,
+      startCursor: data?.posts.pageInfo.startCursor,
+      endCursor: data?.posts.pageInfo.endCursor
     }
   }
 }
