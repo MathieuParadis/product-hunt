@@ -9,9 +9,10 @@ function Post({ post }: any) {
   return (
     <div className="container border w-screen px40">
       <div className="flex">
-        <Image src={post.thumbnail.url} 
-                  width={150} height={150}
-                  alt="character"
+        <Image 
+          src={post.thumbnail.url} 
+          width={150} height={150}
+          alt="post icon"
         />
         <div>
           <h1 className="title">
