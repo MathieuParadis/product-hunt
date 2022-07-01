@@ -2,7 +2,8 @@
 import Image from 'next/image'
 
 // APOLLO IMPORTS
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import client from '../../apolloConfig';
+import { GET_POST } from '../../queries';
 
 function Post({ post }: any) {
   return (
@@ -21,7 +22,6 @@ function Post({ post }: any) {
           </p>
         </div>
       </div>
-
     </div>
   )
 }
@@ -29,39 +29,10 @@ function Post({ post }: any) {
 export default Post;
 
 export async function getServerSideProps(context:any) {
-  const { postSlug = "" } = context.params;
+  const { postSlug } = context.params;
+  const GetPostVariables = { slug: postSlug };
+  const { data } = await client.query({ query: GET_POST, variables: GetPostVariables });
   
-  const client = new ApolloClient({
-    uri: "https://api.producthunt.com/v2/api/graphql",
-    cache: new InMemoryCache(), 
-    headers: {
-      authorization: `Bearer ${process.env.API_KEY}`
-    }
-  })
-
-  const { data } = await client.query({
-    query: gql`
-      query GetPostBySlug($slug: String!) {
-        post(slug: $slug) {
-              id, 
-              name,
-              tagline,
-              description,
-              url, 
-              website,
-              media {url}, 
-              thumbnail {url},
-              makers {
-                name
-              }
-            }
-          }
-      `,
-      variables: {
-          slug: postSlug
-      }
-  });
-
   return {
     props: {
       post: data?.post,

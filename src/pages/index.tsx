@@ -2,7 +2,8 @@
 import Head from 'next/head';
 
 // APOLLO IMPORTS
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import client from '../apolloConfig';
+import { GET_POSTS } from '../queries';
 
 // COMPONENTS IMPORTS
 import PostCard from '../components/PostCard';
@@ -68,43 +69,11 @@ function Home({ posts, startCursor, endCursor }: any) {
 export default Home;
 
 export async function getServerSideProps() {
-  const client = new ApolloClient({
-    uri: "https://api.producthunt.com/v2/api/graphql",
-    cache: new InMemoryCache(), 
-    headers: {
-      authorization: `Bearer ${process.env.API_KEY}`
-    }
-  })
-
-  const { data } = await client.query({
-    query: gql`
-      query GetPosts {
-        posts(topic: "", after: "") {
-          pageInfo {
-            endCursor,
-            startCursor
-          },
-          edges { 
-            node {
-              id,
-              name,
-              tagline,
-              slug,
-              thumbnail {
-                url
-              }
-            } 
-          } 
-        }
-      }
-    `
-  });
+  const { data } = await client.query({ query: GET_POSTS })
 
   return {
     props: {
-      posts: data?.posts.edges,
-      startCursor: data?.posts.pageInfo.startCursor,
-      endCursor: data?.posts.pageInfo.endCursor
+      posts: data?.posts.edges
     }
   }
 }
