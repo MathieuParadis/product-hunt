@@ -43,7 +43,3 @@
 .post-details-tagline {
   @apply text-white text-center pb-4;
 }
-
-.button {
-  @apply p-3 border border-blue-600 hover:border-blue-800 w-2/4 bg-blue-600 hover:bg-blue-800 rounded-lg text-white text-center;
-}

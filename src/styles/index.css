@@ -4,9 +4,8 @@
 @tailwind utilities;
 
 /* COMPONENTS IMPORTS */
-@import './home';
-@import './post';
-
+@import './postCard.css';
+@import './footer.css';
 
 /* PAGES IMPORTS */
-@import './postCard.css';
+@import './post';

@@ -28,3 +28,8 @@ a {
 .title {
   @apply mb-8 text-7xl text-center;
 }
+
+/* BUTTON */
+.button {
+  @apply p-3 border border-blue-600 hover:border-blue-800 bg-blue-600 hover:bg-blue-800 rounded-lg text-white text-center inline-block w-2/3;
+}

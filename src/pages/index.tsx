@@ -10,30 +10,35 @@ import client from '../apolloConfig';
 import { GET_POSTS } from '../queries';
 
 // COMPONENTS IMPORTS
+import Footer from '../components/Footer';
 import PostCard from '../components/PostCard';
 
 function Home() {
   const [posts, setPosts] = useState<any[]>([]);
-  const [category, setCategory] = useState("");
-  const [cursor, setCursor] = useState("");
+  // const [category, setCategory] = useState("");
+  // const [cursor, setCursor] = useState("");
   
-  const GetPostsVariables = { topic: category, after: cursor };
-  const { data, loading, error, refetch } = useQuery(GET_POSTS, {client: client, variables: GetPostsVariables});
+  const GetPostsVariables = { topic: "", after: "" };
+  const { data, loading, error, refetch } = useQuery(GET_POSTS, {client: client, variables: GetPostsVariables, fetchPolicy: 'network-only'});
 
-  const test = () => {
-    refetch({ topic: category, after: cursor });
-    console.log("refetching", data.posts.pageInfo.startCursor);
-  }
+  // const test = () => {
+  //   // console.log("refetching", data.posts.pageInfo.startCursor);
+  //   window.scrollTo(0, 0);
+  //   setCursor(data.posts.pageInfo.startCursor);
+  //   alert(cursor)
+  // }
 
   useEffect(() => { 
     if (data)  {
       setPosts(data.posts.edges);
-      setCursor(data.posts.pageInfo.startCursor);
-      setCategory("");
-      console.log(data.posts.pageInfo.startCursor);
-      console.log("cursor", cursor)
     }  
   }, [data]);
+
+  // useEffect(() => { 
+  //   if (cursor)  {
+  //     refetch({ topic: category, after: cursor });
+  //   }  
+  // }, [cursor, category]);
 
   if (loading) return <h3>Loading</h3>
   if (error) return <h3>Error</h3>
@@ -65,7 +70,12 @@ function Home() {
           )
         }
 
-      <button type="button" onClick={() => test()}>
+      <button type="button" onClick={() => 
+        refetch({ 
+          after: data.posts.pageInfo.startCursor
+          // topic: "tech"  
+        })}
+      >
         Next
       </button>
 
@@ -73,29 +83,7 @@ function Home() {
         </div>
       </main>
 
-      <footer className="footer">
-        <div>
-          Coded with &#x1F9E1; by&nbsp;
-          <a 
-            href="https://github.com/MathieuParadis"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Mathieu
-          </a>
-        </div>
-        &nbsp;&nbsp; &#8212; &nbsp;&nbsp;
-        <div>
-          Credits:&nbsp;
-          <a 
-            href="https://www.producthunt.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Product Hunt
-          </a>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 };

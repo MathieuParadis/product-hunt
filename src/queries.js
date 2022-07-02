@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
   const GET_POSTS = gql`
-    query GetPosts ($topic: String, $cursor: String) {
-      posts(topic: $topic, after: $cursor) {
+    query GetPosts ($topic: String, $after: String) {
+      posts(topic: $topic, after: $after) {
         pageInfo {
           startCursor,
           endCursor
