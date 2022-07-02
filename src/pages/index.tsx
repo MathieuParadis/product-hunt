@@ -18,7 +18,7 @@ function Home() {
   const [cursor, setCursor] = useState("");
   
   const GetPostsVariables = { topic: category, after: cursor };
-  const { data, refetch } = useQuery(GET_POSTS, {client: client, variables: GetPostsVariables});
+  const { data, loading, error, refetch } = useQuery(GET_POSTS, {client: client, variables: GetPostsVariables});
 
   const test = () => {
     refetch({ topic: category, after: cursor });
@@ -33,7 +33,10 @@ function Home() {
       console.log(data.posts.pageInfo.startCursor);
       console.log("cursor", cursor)
     }  
-  }, [data, cursor]);
+  }, [data]);
+
+  if (loading) return <h3>Loading</h3>
+  if (error) return <h3>Error</h3>
 
   return (
     <div className="container">
