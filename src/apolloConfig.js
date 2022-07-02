@@ -4,8 +4,8 @@ const client = new ApolloClient({
   uri: "https://api.producthunt.com/v2/api/graphql",
   cache: new InMemoryCache(), 
   headers: {
-    authorization: `Bearer ${process.env.API_KEY}`
+    authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`
   }
 })
 
-export default client
+export default client;

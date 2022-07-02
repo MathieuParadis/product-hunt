@@ -11,10 +11,10 @@ function PostCard ({ post }: any) {
       />
       <div className="overlay" />
       <div className="post-details">
-        <h2 className="text-white text-center text-3xl pb-6">
+        <h2 className="post-details-title">
           {post.node.name}
         </h2>
-        <p className="text-white text-center pb-4">
+        <p className="post-details-tagline">
           {post.node.tagline}
         </p>
         <Link href={`/posts/${post.node.slug}`}>

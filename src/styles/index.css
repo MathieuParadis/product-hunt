@@ -1,5 +1,12 @@
+/* TAILWIND IMPORTS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* COMPONENTS IMPORTS */
 @import './home';
 @import './post';
+
+
+/* PAGES IMPORTS */
+@import './postCard.css';

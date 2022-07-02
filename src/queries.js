@@ -4,8 +4,8 @@ import { gql } from '@apollo/client';
     query GetPosts ($topic: String, $cursor: String) {
       posts(topic: $topic, after: $cursor) {
         pageInfo {
-          endCursor,
-          startCursor
+          startCursor,
+          endCursor
         },
         edges { 
           node {
@@ -23,7 +23,7 @@ import { gql } from '@apollo/client';
   `
 
   const GET_POST = gql`
-    query GetPostBySlug($slug: String!) {
+    query GetPostBySlug($slug: String) {
       post(slug: $slug) {
         id, 
         name,
@@ -40,4 +40,4 @@ import { gql } from '@apollo/client';
     }
   `;
 
-export { GET_POSTS, GET_POST };
+export { GET_POSTS, GET_POST};

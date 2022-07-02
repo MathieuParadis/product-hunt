@@ -1,15 +1,40 @@
 // NEXT IMPORTS
 import Head from 'next/head';
 
+// REACT IMPORTS
+import React, {useEffect, useState} from 'react';
+
 // APOLLO IMPORTS
+import { useQuery } from "@apollo/client";
 import client from '../apolloConfig';
 import { GET_POSTS } from '../queries';
 
 // COMPONENTS IMPORTS
 import PostCard from '../components/PostCard';
 
-function Home({ posts, startCursor, endCursor }: any) {
-  console.log('posts', posts, startCursor, endCursor);
+function Home() {
+  const [posts, setPosts] = useState<any[]>([]);
+  const [category, setCategory] = useState("");
+  const [cursor, setCursor] = useState("");
+  
+  const GetPostsVariables = { topic: category, after: cursor };
+  const { data, refetch } = useQuery(GET_POSTS, {client: client, variables: GetPostsVariables});
+
+  const test = () => {
+    refetch({ topic: category, after: cursor });
+    console.log("refetching", data.posts.pageInfo.startCursor);
+  }
+
+  useEffect(() => { 
+    if (data)  {
+      setPosts(data.posts.edges);
+      setCursor(data.posts.pageInfo.startCursor);
+      setCategory("");
+      console.log(data.posts.pageInfo.startCursor);
+      console.log("cursor", cursor)
+    }  
+  }, [data, cursor]);
+
   return (
     <div className="container">
       <Head>
@@ -31,11 +56,17 @@ function Home({ posts, startCursor, endCursor }: any) {
         </p>
 
         <div className="posts">
-        {
-          posts.map((post:any) => 
+        { 
+          posts?.map((post:any) => 
             <PostCard post={post} key={post.node.id} />
           )
         }
+
+      <button type="button" onClick={() => test()}>
+        Next
+      </button>
+
+
         </div>
       </main>
 
@@ -67,13 +98,3 @@ function Home({ posts, startCursor, endCursor }: any) {
 };
 
 export default Home;
-
-export async function getServerSideProps() {
-  const { data } = await client.query({ query: GET_POSTS })
-
-  return {
-    props: {
-      posts: data?.posts.edges
-    }
-  }
-}

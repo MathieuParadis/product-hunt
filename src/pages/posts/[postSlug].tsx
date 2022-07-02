@@ -1,5 +1,5 @@
 // NEXT IMPORTS
-import Image from 'next/image'
+import Image from 'next/image';
 
 // APOLLO IMPORTS
 import client from '../../apolloConfig';
