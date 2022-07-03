@@ -16,17 +16,17 @@ import PostCard from '../components/PostCard';
 
 function Home() {
   const [posts, setPosts] = useState<any[]>([]);
-  // const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("");
   // const [cursor, setCursor] = useState("");
   
   const GetPostsVariables = { topic: "", after: "" };
   const { data, loading, error, refetch } = useQuery(GET_POSTS, {client: client, variables: GetPostsVariables, fetchPolicy: 'network-only'});
 
   const next = () => {
-    window.scrollTo(0, 0);
+    window.scrollTo({top: 0, behavior: 'smooth'});
     refetch({ 
-      after: data.posts.pageInfo.endCursor
-      // topic: "tech"  
+      after: data.posts.pageInfo.endCursor,
+      topic: category  
     })
   }
 
