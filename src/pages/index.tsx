@@ -3,6 +3,7 @@ import Head from 'next/head';
 
 // REACT IMPORTS
 import React, {useEffect, useState} from 'react';
+import ReactLoading from 'react-loading';
 
 // APOLLO IMPORTS
 import { useQuery } from "@apollo/client";
@@ -40,7 +41,7 @@ function Home() {
   //   }  
   // }, [cursor, category]);
 
-  if (loading) return <h3>Loading</h3>
+  // if (loading) return <h3>Loading</h3>
   if (error) return <h3>Error</h3>
 
   return (
@@ -64,23 +65,45 @@ function Home() {
             Popular posts from Product Hunt
           </p>
 
-          <div className="posts">
-          { 
-            posts?.map((post:any) => 
-              <PostCard post={post} key={post.node.id} />
+          {
+            loading && (
+              (
+                <div className="">
+                  <p className="mb-3">
+                    Loading
+                  </p>
+                  <ReactLoading type="spinningBubbles" color="#3385d6" height="200%" width="200%"/>
+                </div>
+              )
             )
           }
 
-            <button type="button" onClick={() => 
-              refetch({ 
-                after: data.posts.pageInfo.startCursor
-                // topic: "tech"  
-              })}
-            >
-              Next
-            </button>
-
-          </div>
+          {
+            data && (
+              (
+                <div className="posts">
+                  { 
+                    posts?.map((post:any) => 
+                      <PostCard post={post} key={post.node.id} />
+                    )
+                  }
+      
+                  <button 
+                    type="button"
+                    className=""
+                    onClick={() => 
+                      refetch({ 
+                        after: data.posts.pageInfo.startCursor
+                        // topic: "tech"  
+                      })
+                    }
+                  >
+                    Next
+                  </button>
+                </div>
+              )
+            )
+          }
         </main>
       </div>
       <Footer />
