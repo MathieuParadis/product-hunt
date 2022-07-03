@@ -2,6 +2,9 @@
 import Image from 'next/image'
 import Link from 'next/link';
 
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
+
 // APOLLO IMPORTS
 import client from '../../apolloConfig';
 import { GET_POST } from '../../queries';
@@ -42,50 +45,69 @@ function Post({ post }: any) {
           </Link>
         </div>
 
-        <div className="flex flex-wrap mb-3">
-          <span className="font-bold">
-            Author
-          </span>:&nbsp;
-          { 
-            post.makers.map((maker:any) => 
-              <p key={maker.id}>
-                {maker.name}
-                {
-                  post.makers[post.makers.length - 1].id !== maker.id && 
-                  <span>,&nbsp;</span>
-                }
-              </p>
-            )
-          }
+        <div className=" mb-3">
+            <p className="flex flex-wrap">
+            <span className="font-bold">
+              Author
+            </span>:&nbsp;
+            { 
+              post.makers.map((maker:any) => 
+                <p key={maker.id}>
+                  {maker.name}
+                  {
+                    post.makers[post.makers.length - 1].id !== maker.id && 
+                    <span>,&nbsp;</span>
+                  }
+                </p>
+              )
+            }
+          </p>
         </div>
 
-        <div className="flex flex-wrap mb-3">
+        <div className=" mb-3">
+          <p className="flex flex-wrap">
           <span className="font-bold">
             Category
           </span>:&nbsp;
-          { 
-            post.topics?.edges.map((topic:any) =>
-              <p key={topic.node.id}>
-                {topic.node.name}
-                {
-                  post.topics.edges[post.topics.edges.length - 1].node.id !== topic.node.id && 
-                  <span>,&nbsp;</span>
-                }
-              </p> 
-            )
-          }
+            { 
+              post.topics?.edges.map((topic:any) =>
+                <p key={topic.node.id}>
+                  {topic.node.name}
+                  {
+                    post.topics.edges[post.topics.edges.length - 1].node.id !== topic.node.id && 
+                    <span>,&nbsp;</span>
+                  }
+                </p> 
+              )
+            }
+          </p>
         </div>
 
         <section className="description">
-          <p>
-            {post.description}
-          </p>
+          <div className="flex flex-wrap mb-3"> 
+            <p className="mb-8">
+              <span className="font-bold">
+                Description
+              </span>:&nbsp;
+              {post.description}
+            </p>
+          </div>
+          <Carousel>
+            { 
+              post.media?.map((media: (any)) =>
+                <div key={media.url}>
+                  <Image 
+                    src={media.url} 
+                    width={1000} height={700}
+                    className=""
+                    alt="post icon"
+                  />
+                </div> 
+              )
+            }
 
+          </Carousel>
         </section>
-
-
-
-
       </div>
       <Footer />
     </>

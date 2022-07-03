@@ -39,8 +39,12 @@ import { gql } from '@apollo/client';
         },
         url, 
         website,
-        media {url}, 
-        thumbnail {url},
+        media {
+          url
+        }, 
+        thumbnail {
+          url
+        },
         makers {
           id,
           name
