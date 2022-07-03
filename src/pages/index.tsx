@@ -22,12 +22,13 @@ function Home() {
   const GetPostsVariables = { topic: "", after: "" };
   const { data, loading, error, refetch } = useQuery(GET_POSTS, {client: client, variables: GetPostsVariables, fetchPolicy: 'network-only'});
 
-  // const test = () => {
-  //   // console.log("refetching", data.posts.pageInfo.startCursor);
-  //   window.scrollTo(0, 0);
-  //   setCursor(data.posts.pageInfo.startCursor);
-  //   alert(cursor)
-  // }
+  const next = () => {
+    window.scrollTo(0, 0);
+    refetch({ 
+      after: data.posts.pageInfo.endCursor
+      // topic: "tech"  
+    })
+  }
 
   useEffect(() => { 
     if (data)  {
@@ -81,27 +82,43 @@ function Home() {
           {
             data && (
               (
-                <div className="posts">
+                <div className="posts mb-10">
                   { 
                     posts?.map((post:any) => 
                       <PostCard post={post} key={post.node.id} />
                     )
                   }
-      
-                  <button 
-                    type="button"
-                    className=""
-                    onClick={() => 
-                      refetch({ 
-                        after: data.posts.pageInfo.startCursor
-                        // topic: "tech"  
-                      })
-                    }
-                  >
-                    Next
-                  </button>
                 </div>
               )
+            )
+          }
+          {
+            data && posts && (
+              <div>
+
+
+                {/* <button 
+                  type="button"
+                  className="button bg-blue-600 w-24"
+                  onClick={() => 
+                    refetch({ 
+                      before: data.posts.pageInfo.startCursor
+                      // topic: "tech"  
+                    })
+                  }
+                >
+                  Previous
+                </button> */}
+
+                <button 
+                  type="button"
+                  className="button bg-blue-600 w-24"
+                  onClick={() => next()}
+                >
+                  Next
+                </button>
+              </div>
+
             )
           }
         </main>
