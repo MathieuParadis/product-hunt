@@ -6,7 +6,7 @@
 .card:hover,
 .card:focus,
 .card:active {
-  @apply border-orange-800
+  @apply border-orange-800;
 }
 
 .card:hover .overlay,
@@ -15,7 +15,7 @@
 .card:hover .post-details,
 .card:focus .post-details,
 .card:active .post-details {
-  @apply -translate-y-full
+  @apply -translate-y-full visible;
 }
 
 .posts {
@@ -29,11 +29,11 @@
 }
 
 .overlay {
-  @apply absolute w-full h-full top-full left-0 bg-black opacity-[.90] transition duration-700;
+  @apply absolute w-full h-full top-full left-0 bg-black opacity-[.90] transition duration-700 invisible;
 }
 
 .post-details {
-  @apply absolute w-full h-full top-full left-0 p-3 flex flex-col justify-center items-center transition duration-700;
+  @apply absolute w-full h-full top-full left-0 p-3 flex flex-col justify-center items-center transition duration-700 invisible;
 }
 
 .post-details-title {

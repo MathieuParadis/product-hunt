@@ -15,40 +15,39 @@ import Footer from '../../components/Footer';
 function Post({ post }: any) {
   return (
     <>
-      <div className="container flex flex-col border grow">
+      <div className="container flex flex-col lg:px-20">
         <Link href="/">
           <a className="link-back">
           &#8592; Back
           </a>
         </Link>
-        <div className="flex flex-col items-center">
+        <div className="post-head">
           <Image 
             src={post.thumbnail.url} 
-            width={180} height={180}
-            alt="post icon"
+            width={270} height={270}
+            alt={`${post.name} thumbnail`}
           />
-          <div>
-            <h1 className="title">
+          <div className="flex flex-col justify-between min-h-full">
+            <h1 className="post-title">
               {post.name}
             </h1>
-            <p className="text-2xl">
+            <p className="post-tagline">
               {post.tagline}
             </p>
+            <div className="post-links">
+              <Link href={post.website}>
+                <a target="_blank" className="button w-40">
+                  Visit website
+                </a>
+              </Link>
+              <Link href={post.url}>
+                <a target="_blank" className="button w-40">
+                  See on PH
+                </a>
+              </Link>
+            </div>
           </div>
         </div>
-        <div className="my-8 flex justify-center space-x-4">
-          <Link href={post.website}>
-            <a target="_blank" className="button w-40">
-              Visit website
-            </a>
-          </Link>
-          <Link href={post.url}>
-            <a target="_blank" className="button w-40">
-              See on PH
-            </a>
-          </Link>
-        </div>
-
         <div className=" mb-3">
             <p className="flex flex-wrap">
             <span className="font-bold">
@@ -102,9 +101,8 @@ function Post({ post }: any) {
                 <div key={media.url}>
                   <Image 
                     src={media.url} 
-                    width={1000} height={700}
-                    
-                    alt="post icon"
+                    width={1000} height={600}
+                    alt={`${post.name} media image`}
                   />
                 </div> 
               )

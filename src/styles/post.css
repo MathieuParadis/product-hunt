@@ -7,3 +7,47 @@
 .link-back:active {
   @apply text-violet-600;
 }
+
+.post-head {
+  @apply flex flex-col items-center mb-10;
+}
+
+@screen md {
+  .post-head {
+    @apply flex flex-row justify-between items-stretch;
+  }
+}
+
+.post-logo {
+  @apply w-40 h-40;
+}
+
+.post-title {
+  @apply text-5xl text-center pt-4;
+}
+
+@screen md {
+  .post-title {
+    @apply text-end p-0 mb-2;
+  }
+}
+
+.post-tagline {
+  @apply text-2xl text-center;
+}
+
+@screen md {
+  .post-tagline {
+    @apply text-2xl text-end;
+  }
+}
+
+.post-links {
+  @apply mt-8 flex justify-center space-x-4;
+}
+
+@screen md {
+  .post-links {
+    @apply flex justify-end;
+  }
+}
