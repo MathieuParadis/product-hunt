@@ -20,5 +20,10 @@ $ yarn dev
   
 Then, access the app in your browser at http://localhost:3000/ 
 
+## How to test
+```console
+$ yarn lint
+```
+
 ### In production:
 Go to [Neo Hunt](https://neo-hunt.herokuapp.com/) and enjoy the experience!
