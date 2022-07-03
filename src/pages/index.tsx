@@ -44,47 +44,47 @@ function Home() {
   if (error) return <h3>Error</h3>
 
   return (
-    <div className="container">
-      <Head>
-        <title>Neo Hunt</title>
-        <meta name="description" content="Product Hunt Neo" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <>
+      <div className="container grow">
+        <Head>
+          <title>Neo Hunt</title>
+          <meta name="description" content="Product Hunt Neo" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-      <main className="main">
-        <h1 className="title">
-          Welcome to&nbsp;
-          <span className="text-orange-500">
-          Neo Hunt
-          </span>
-        </h1>
+        <main className="main">
+          <h1 className="title">
+            Welcome to&nbsp;
+            <span className="text-orange-500">
+            Neo Hunt
+            </span>
+          </h1>
 
-        <p className="text-3xl text-center font-bold mt-4 mb-8">
-          Popular posts from Product Hunt
-        </p>
+          <p className="text-3xl text-center font-bold mt-4 mb-8">
+            Popular posts from Product Hunt
+          </p>
 
-        <div className="posts">
-        { 
-          posts?.map((post:any) => 
-            <PostCard post={post} key={post.node.id} />
-          )
-        }
+          <div className="posts">
+          { 
+            posts?.map((post:any) => 
+              <PostCard post={post} key={post.node.id} />
+            )
+          }
 
-      <button type="button" onClick={() => 
-        refetch({ 
-          after: data.posts.pageInfo.startCursor
-          // topic: "tech"  
-        })}
-      >
-        Next
-      </button>
+            <button type="button" onClick={() => 
+              refetch({ 
+                after: data.posts.pageInfo.startCursor
+                // topic: "tech"  
+              })}
+            >
+              Next
+            </button>
 
-
-        </div>
-      </main>
-
+          </div>
+        </main>
+      </div>
       <Footer />
-    </div>
+    </>
   )
 };
 
