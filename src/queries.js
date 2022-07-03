@@ -29,11 +29,20 @@ import { gql } from '@apollo/client';
         name,
         tagline,
         description,
+        topics {
+          edges {
+            node {
+              id,
+              name
+            }
+          }
+        },
         url, 
         website,
         media {url}, 
         thumbnail {url},
         makers {
+          id,
           name
         }
       }

@@ -41,6 +41,51 @@ function Post({ post }: any) {
             </a>
           </Link>
         </div>
+
+        <div className="flex flex-wrap mb-3">
+          <span className="font-bold">
+            Author
+          </span>:&nbsp;
+          { 
+            post.makers.map((maker:any) => 
+              <p key={maker.id}>
+                {maker.name}
+                {
+                  post.makers[post.makers.length - 1].id !== maker.id && 
+                  <span>,&nbsp;</span>
+                }
+              </p>
+            )
+          }
+        </div>
+
+        <div className="flex flex-wrap mb-3">
+          <span className="font-bold">
+            Category
+          </span>:&nbsp;
+          { 
+            post.topics?.edges.map((topic:any) =>
+              <p key={topic.node.id}>
+                {topic.node.name}
+                {
+                  post.topics.edges[post.topics.edges.length - 1].node.id !== topic.node.id && 
+                  <span>,&nbsp;</span>
+                }
+              </p> 
+            )
+          }
+        </div>
+
+        <section className="description">
+          <p>
+            {post.description}
+          </p>
+
+        </section>
+
+
+
+
       </div>
       <Footer />
     </>
