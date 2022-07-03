@@ -53,4 +53,17 @@ import { gql } from '@apollo/client';
     }
   `;
 
-export { GET_POSTS, GET_POST};
+const GET_TOPICS = gql`
+  query GetPostBySlug {
+    topics (first: 10) {
+      edges {
+        node {
+          id, 
+          name
+        }
+      }
+    }
+  }
+`;
+
+export { GET_POSTS, GET_POST, GET_TOPICS };

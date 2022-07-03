@@ -8,17 +8,16 @@ import ReactLoading from 'react-loading';
 // APOLLO IMPORTS
 import { useQuery } from "@apollo/client";
 import client from '../apolloConfig';
-import { GET_POSTS } from '../queries';
+import { GET_POSTS, GET_TOPICS } from '../queries';
 
 // COMPONENTS IMPORTS
 import Footer from '../components/Footer';
 import PostCard from '../components/PostCard';
 
-function Home() {
+function Home({ topics }: any) {
   const [posts, setPosts] = useState<any[]>([]);
   const [category, setCategory] = useState("");
-  // const [cursor, setCursor] = useState("");
-  
+
   const GetPostsVariables = { topic: "", after: "" };
   const { data, loading, error, refetch } = useQuery(GET_POSTS, {client: client, variables: GetPostsVariables, fetchPolicy: 'network-only'});
 
@@ -30,17 +29,26 @@ function Home() {
     })
   }
 
+  const changeCategory = (category: any) => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    refetch({ 
+      topic: category
+    })
+  }
+
   useEffect(() => { 
     if (data)  {
       setPosts(data.posts.edges);
     }  
   }, [data]);
 
-  // useEffect(() => { 
-  //   if (cursor)  {
-  //     refetch({ topic: category, after: cursor });
-  //   }  
-  // }, [cursor, category]);
+  useEffect(() => { 
+    if (category)  {
+      refetch({ 
+        topic: category 
+      })
+    }  
+  }, [category]);
 
   // if (loading) return <h3>Loading</h3>
   if (error) return <h3>Error</h3>
@@ -78,6 +86,23 @@ function Home() {
               )
             )
           }
+
+          <select className="select-form-control" value={category} onChange={(e) => changeCategory(e.target.value)}>
+            {
+              topics?.map((topic:any) =>
+              // <Fragment key={topic.node.id}>
+              // {
+              //   topics[0].node.id === topic.node.id && 
+              //   <option defaultValue=""> -- Select a topic -- </option> 
+              // }
+              <option value={topic.node.name}>{topic.node.name}</option>
+            // <Fragment />
+
+              )
+            }
+          </select>
+
+
 
           {
             data && (
@@ -129,3 +154,13 @@ function Home() {
 };
 
 export default Home;
+
+export async function getServerSideProps() {
+  const { data } = await client.query({ query: GET_TOPICS });
+  
+  return {
+    props: {
+      topics: data?.topics.edges
+    }
+  }
+}
