@@ -16,11 +16,15 @@ function Post({ post }: any) {
   return (
     <>
       <div className="container flex flex-col border grow">
+        <Link href="/">
+          <a className="link-back">
+          &#8592; Back
+          </a>
+        </Link>
         <div className="flex flex-col items-center">
           <Image 
             src={post.thumbnail.url} 
             width={180} height={180}
-            className=""
             alt="post icon"
           />
           <div>
@@ -33,12 +37,12 @@ function Post({ post }: any) {
           </div>
         </div>
         <div className="my-8 flex justify-center space-x-4">
-          <Link href={post.website} className="">
+          <Link href={post.website}>
             <a target="_blank" className="button w-40">
               Visit website
             </a>
           </Link>
-          <Link href={post.url} className="">
+          <Link href={post.url}>
             <a target="_blank" className="button w-40">
               See on PH
             </a>
@@ -99,7 +103,7 @@ function Post({ post }: any) {
                   <Image 
                     src={media.url} 
                     width={1000} height={700}
-                    className=""
+                    
                     alt="post icon"
                   />
                 </div> 

@@ -1,0 +1,9 @@
+.link-back {
+  @apply text-blue-600 text-xl pb-8;
+}
+
+.link-back:hover,
+.link-back:focus,
+.link-back:active {
+  @apply text-violet-600;
+}
