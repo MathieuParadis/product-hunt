@@ -6,7 +6,7 @@ function PostCard ({ post }: any) {
   return (
     <div className="card" key={post.node.id}>
       <Image src={post.node.thumbnail.url} 
-        width={200} height={200}
+        width={220} height={220}
         alt="character"
       />
       <div className="overlay" />

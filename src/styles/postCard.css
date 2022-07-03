@@ -24,7 +24,7 @@
 
 @screen md {
   .posts {
-    @apply flex flex-wrap justify-center items-center gap-12;
+    @apply flex flex-wrap justify-center items-center gap-10;
   }
 }
 
@@ -37,7 +37,7 @@
 }
 
 .post-details-title {
-  @apply text-white text-center text-3xl pb-6;
+  @apply text-white text-center text-3xl pb-4;
 }
 
 .post-details-tagline {

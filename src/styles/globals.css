@@ -21,7 +21,7 @@ a {
 
 /* CONTAINER */
 .container {
-  @apply min-h-screen p-6;
+  @apply min-h-screen p-6 px-0;
 }
 
 /* TITLE */
