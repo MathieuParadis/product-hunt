@@ -92,8 +92,7 @@ function Home({ topics }: any) {
 
           { data && topics && 
             (
-              // <select className="mb-10" onChange={(e) => changeCategory(e.target.value)}>
-              <select className="mb-10" onChange={(e) => changeCategory(e.target.value)}>
+              <select className="w-1/2 sm:w-60 border-2 border-blue-600 rounded mb-10" onChange={(e) => changeCategory(e.target.value)}>
                 <option defaultValue=""> -- Select a topic -- </option>
                 {
                   topics?.map((topic:any) =>
@@ -128,7 +127,7 @@ function Home({ topics }: any) {
                   className="button bg-blue-600 w-40"
                   onClick={() => loadMore()}
                 >
-                  Load More
+                  Load more
                 </button>
               </div>
             )
