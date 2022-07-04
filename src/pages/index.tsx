@@ -21,8 +21,7 @@ function Home({ topics }: any) {
   const GetPostsVariables = { topic: "", after: "" };
   const { data, loading, error, refetch } = useQuery(GET_POSTS, {client: client, variables: GetPostsVariables, fetchPolicy: 'network-only'});
 
-  const next = () => {
-    window.scrollTo({top: 0, behavior: 'smooth'});
+  const loadMore = () => {
     refetch({ 
       after: data.posts.pageInfo.endCursor,
       topic: category  
@@ -38,9 +37,10 @@ function Home({ topics }: any) {
 
   useEffect(() => { 
     if (data)  {
-      setPosts(data.posts.edges);
+      const previousPosts = posts
+      setPosts([...previousPosts, ...data.posts.edges]);
     }  
-  }, [data]);
+  }, [data, posts]);
 
   if (error) return <h3>Error</h3>
 
@@ -116,27 +116,12 @@ function Home({ topics }: any) {
           {
             data && posts && (
               <div>
-
-
-                {/* <button 
-                  type="button"
-                  className="button bg-blue-600 w-24"
-                  onClick={() => 
-                    refetch({ 
-                      before: data.posts.pageInfo.startCursor
-                      // topic: "tech"  
-                    })
-                  }
-                >
-                  Previous
-                </button> */}
-
                 <button 
                   type="button"
-                  className="button bg-blue-600 w-24"
-                  onClick={() => next()}
+                  className="button bg-blue-600 w-40"
+                  onClick={() => loadMore()}
                 >
-                  Next
+                  Load More
                 </button>
               </div>
             )
