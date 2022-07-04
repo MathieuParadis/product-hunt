@@ -25,22 +25,22 @@ function Home({ topics }: any) {
     refetch({ 
       after: data.posts.pageInfo.endCursor,
       topic: category  
-    })
+    });
   }
 
   const changeCategory = (cat: any) => {
     window.scrollTo({top: 0, behavior: 'smooth'});
     refetch({ 
       topic: cat
-    })
+    });
   }
 
   useEffect(() => { 
     if (data)  {
-      const previousPosts = posts
+      const previousPosts = posts;
       setPosts([...previousPosts, ...data.posts.edges]);
     }  
-  }, [data, posts]);
+  }, [data]);
 
   if (error) return <h3>Error</h3>
 
@@ -88,17 +88,20 @@ function Home({ topics }: any) {
             )
           }
 
-          <select className="select-form-control" value={category} onChange={(e) => changeCategory(e.target.value)}>
-            <option defaultValue=""> -- Select a topic -- </option> 
-
-            { data && topics &&
-              topics?.map((topic:any) =>
-                <option value={topic.node.name}>{topic.node.name}</option>
-              )
-            }
-          </select>
-
-
+          { data && topics && 
+            (
+              <select className="select-form-control" value={category} onChange={(e) => changeCategory(e.target.value)}>
+                <option defaultValue=""> -- Select a topic -- </option>
+                {
+                  topics?.map((topic:any) =>
+                    (
+                      <option value={topic.node.name}>{topic.node.name}</option>
+                    )
+                  )
+                } 
+              </select>
+            )
+          }
 
           {
             data && (
@@ -113,6 +116,7 @@ function Home({ topics }: any) {
               )
             )
           }
+
           {
             data && posts && (
               <div>
