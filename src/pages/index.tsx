@@ -16,7 +16,7 @@ import PostCard from '../components/PostCard';
 
 function Home({ topics }: any) {
   const [posts, setPosts] = useState<any[]>([]);
-  const [category] = useState("");
+  const [category, setCategory] = useState(false);
 
   const GetPostsVariables = { topic: "", after: "" };
   const { data, loading, error, refetch } = useQuery(GET_POSTS, {client: client, variables: GetPostsVariables, fetchPolicy: 'network-only'});
@@ -24,25 +24,27 @@ function Home({ topics }: any) {
   const loadMore = () => {
     refetch({ 
       after: data.posts.pageInfo.endCursor,
-      topic: category  
     });
   }
 
-  const changeCategory = (cat: any) => {
+  const changeCategory = (cat: string) => {
+    setCategory(true);
     window.scrollTo({top: 0, behavior: 'smooth'});
     refetch({ 
+      after: "",
       topic: cat
     });
   }
 
   useEffect(() => { 
-    if (data)  {
+    if (data && !category)  {
       const previousPosts = posts;
       setPosts([...previousPosts, ...data.posts.edges]);
-    }  
+    } else if (data && category) {
+      setCategory(false);
+      setPosts(data.posts.edges);
+    }
   }, [data]);
-
-  if (error) return <h3>Error</h3>
 
   return (
     <>
@@ -90,12 +92,13 @@ function Home({ topics }: any) {
 
           { data && topics && 
             (
-              <select className="select-form-control" value={category} onChange={(e) => changeCategory(e.target.value)}>
+              // <select className="mb-10" onChange={(e) => changeCategory(e.target.value)}>
+              <select className="mb-10" onChange={(e) => changeCategory(e.target.value)}>
                 <option defaultValue=""> -- Select a topic -- </option>
                 {
                   topics?.map((topic:any) =>
                     (
-                      <option value={topic.node.name}>{topic.node.name}</option>
+                      <option key={topic.node.id} value={topic.node.slug}>{topic.node.name}</option>
                     )
                   )
                 } 
@@ -118,7 +121,7 @@ function Home({ topics }: any) {
           }
 
           {
-            data && posts && (
+            data?.posts.pageInfo.hasNextPage && (
               <div>
                 <button 
                   type="button"

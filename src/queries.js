@@ -59,7 +59,8 @@ const GET_TOPICS = gql`
       edges {
         node {
           id, 
-          name
+          name,
+          slug
         }
       }
     }
