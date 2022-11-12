@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start -p $PORT",
     "lint": "next lint",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build"
+    "predeploy" : "next build",
+    "deploy": "next build && next export && git add out/ && git commit -m \"Deploy gh-pages\" && git subtree push --prefix out origin gh-pages"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
